@@ -20,7 +20,10 @@ if (Meteor.isClient) {
   Template.leaderboard.events({
     'click input.inc': function () {
       Players.update(Session.get("selected_player"), {$inc: {score: 5}});
-    }
+    },
+    'click .del': function(){
+    Players.remove(Session.get('selected_player'));
+  }
   });
 
   Template.player.events({
@@ -30,12 +33,18 @@ if (Meteor.isClient) {
   });
     
     Template.addplayers.events({
-    'click .button':function(){
-        var name = $('#inputfield').val();
+    'click .add':function(){
+        var name = $('#addfield').val();
         Players.insert({name:name , score: 0});
-        Players.remove({name:''});
     }
     });
+    
+    Template.removeplayer.events({
+    'click .remove': function(){
+        var name = $('#removefield').val();
+        Players.remove(name);
+    }
+});
 }
 
 // On server startup, create some players if the database is empty.
