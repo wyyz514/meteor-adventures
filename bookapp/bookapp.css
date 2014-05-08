@@ -68,3 +68,14 @@ body
 {
     display:none;
 }
+
+.top-right-text
+{
+    float:right;
+    cursor:pointer;
+}
+
+.top-right-text:hover
+{
+    color:steelblue;
+}

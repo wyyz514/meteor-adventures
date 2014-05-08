@@ -55,6 +55,22 @@ if (Meteor.isClient) {
     }
     });
     
+    Template.instructiontemplate.instructions = function(){
+        return "Instructions";
+    };
+    
+    //show modal for instructions
+    Template.instructiontemplate.events({
+        'click': function(){
+            $('.modal-trigger').on('click','.top-right-text',function(){
+                $(this).click(function(){
+                    $('#instructions').modal('show');
+                });
+            });
+        }
+    });
+    
+    
     function updateCumulativeRating()
     {
         console.log(currentRating);
@@ -91,6 +107,7 @@ if (Meteor.isServer) {
               BookCollection.insert({title:bookData[index].title, author:bookData[index].author, avgRating:0, cumulativeRating:0, numberOfRatings:0});
           }
       }
+      
       
   });
 }
