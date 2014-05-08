@@ -1,10 +1,10 @@
 <head>
   <title>bookapp</title>
     <link rel="stylesheet" type = "text/css" href="http://fonts.googleapis.com/css?family=Open Sans"/>
-    <script src="script.js"></script>
 </head>
 
 <body>
+    <div class="alert alert-success"><span>Thank you for rating {{> titleinalert}}</span><button class="close" data-dismiss="alert">&times;</button></div>
     <h1 class="heading">BOOK APP</h1>
     <div class="data-container">
         <div class="title-container">
@@ -32,9 +32,10 @@
         <h3>{{selected_title}}</h3>
             {{> author}}
             {{> bookrating}}
-            <h3>Rate this book!</h3>
-            <span class="stars">*****</span>
-            {{>counter}}
+        <h3>Rate this book!</h3>
+    <div class="starholder">{{> star}}</div>
+    
+    
     {{else}}
         <h2>Nothing selected</h2>
     {{/if}}
@@ -48,3 +49,14 @@
     <p><span>Average Rating&#58;</span> {{avgRating}}</p>
 </template>
 
+<template name="star">
+    <span class="stars">&#42;</span>
+    <span class="stars">&#42;</span>
+    <span class="stars">&#42;</span>
+    <span class="stars">&#42;</span>
+    <span class="stars">&#42;</span>
+</template>
+
+<template name="titleinalert">
+    {{title}}
+</template>
