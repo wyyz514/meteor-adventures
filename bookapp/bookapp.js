@@ -91,5 +91,6 @@ if (Meteor.isServer) {
               BookCollection.insert({title:bookData[index].title, author:bookData[index].author, avgRating:0, cumulativeRating:0, numberOfRatings:0});
           }
       }
+      
   });
 }
