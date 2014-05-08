@@ -29,10 +29,6 @@ if (Meteor.isClient) {
         var rating = BookCollection.findOne(Session.get('selected-title'));
         return rating && rating.avgRating;
     };
-    
-    $('.stars').hover({
-        
-    });
 }
 
 if (Meteor.isServer) {
