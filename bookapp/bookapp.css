@@ -1,0 +1,60 @@
+/* CSS declarations go here */
+
+*
+{
+    font-family:Open Sans;
+}
+
+.heading
+{
+    text-align:center;
+}
+
+ul li
+{
+    list-style:none;
+    cursor:pointer;
+}
+
+body
+{
+    max-width:900px;
+    margin: 0 auto;
+    padding:20px;
+}
+
+.data-container
+{
+    width:inherit;
+}
+
+.title-container
+{
+    width:450px;
+    border-right:1px solid black;
+    font-size:1.5em;
+}
+
+.book-info
+{
+    width:450px;
+    position:relative;
+    left: 470px;
+    top:-300px;
+    
+}
+
+.selected
+{
+    cursor:pointer;
+    background-color:steelblue;
+    padding:5px;
+    color:white;
+}
+
+.stars
+{
+    font-size:4em;
+    color:grey;
+    cursor:pointer;
+}

@@ -1,0 +1,52 @@
+<head>
+  <title>bookapp</title>
+    <link rel="stylesheet" type = "text/css" href="http://fonts.googleapis.com/css?family=Open Sans"/>
+</head>
+
+<body>
+    <h1 class="heading">BOOK APP</h1>
+    <div class="data-container">
+        <div class="title-container">
+            <ul>{{> books}}</ul>
+        </div>
+        
+        <div class="book-info">
+            {{> bookinfo}}
+        </div>
+    </div>
+</body>
+
+<template name="books">
+    {{#each book}}
+    {{> title}}
+    {{/each}}
+</template>
+
+<template name="title">
+    <li class="{{selected}}">{{title}}</li><br/>
+</template>
+
+<template name="bookinfo">
+     {{#if selected_title}}
+        <h3>{{selected_title}}</h3>
+            {{> author}}
+            {{> bookrating}}
+            <h3>Rate this book!</h3>
+            <span class="stars">*****</span>
+            {{>counter}}
+    {{else}}
+        <h2>Nothing selected</h2>
+    {{/if}}
+</template>
+
+<template name="author">
+    <p><span>Author &#58;</span> {{author}}</p>
+</template>
+
+<template name="bookrating">
+    <p><span>Average Rating&#58;</span> {{avgRating}}</p>
+</template>
+
+<template name="counter">
+    <p>{{count}} stars</p>
+</template>
