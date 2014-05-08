@@ -35,7 +35,10 @@ if (Meteor.isClient) {
     Template.addplayers.events({
     'click .add':function(){
         var name = $('#addfield').val();
-        Players.insert({name:name , score: 0});
+        if(name != "")
+        {
+            Players.insert({name:name , score: 0});
+        }
     }
     });
     
