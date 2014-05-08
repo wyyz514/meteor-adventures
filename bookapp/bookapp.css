@@ -58,3 +58,13 @@ body
     color:grey;
     cursor:pointer;
 }
+
+.starholder .star-selected
+{
+    color:steelblue;
+}
+
+.alert
+{
+    display:none;
+}

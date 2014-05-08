@@ -1,5 +1,5 @@
 BookCollection = new Meteor.Collection('bookCollection');
-
+var currentRating = 0;
 if (Meteor.isClient) {
     Template.books.book = function(){
         return BookCollection.find();
@@ -20,6 +20,10 @@ if (Meteor.isClient) {
         return name && name.title;
     };
     
+    Template.titleinalert.title = function(){
+        var title = BookCollection.findOne(Session.get('selected-title'));
+        return title && title.title;
+    };
     Template.author.author = function(){
         var obj = BookCollection.findOne(Session.get('selected-title'));
         return obj && obj.author;
@@ -29,6 +33,17 @@ if (Meteor.isClient) {
         var rating = BookCollection.findOne(Session.get('selected-title'));
         return rating && rating.avgRating;
     };
+    
+    Template.star.events({
+    'click': function(){
+        $('.starholder').on('click','.stars', function(){
+            $(this).addClass('star-selected');
+            $(this).prevAll().addClass('star-selected');
+            $(this).nextAll().removeClass('star-selected');
+            $('.alert').fadeToggle(1000);
+        });
+    }
+    });
 }
 
 if (Meteor.isServer) {
