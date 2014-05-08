@@ -6,6 +6,10 @@
   <div id="outer">
     {{> leaderboard}}
   </div>
+    <div class="container">
+        <h3>Add a scientist</h3>
+        {{> addplayers}}
+    </div>
 </body>
 
 <template name="leaderboard">
@@ -33,4 +37,10 @@
     <span class="score">{{score}}</span>
   </div>
 </template>
+
+<template name = "addplayers">
+    <input type="text" id="inputfield"/>
+    <button class="button">ADD</button>
+</template>
+          
 
