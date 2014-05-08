@@ -20,6 +20,7 @@ if (Meteor.isClient) {
         return name && name.title;
     };
     
+    //the title in the alert is the same as the one selected. 
     Template.titleinalert.title = function(){
         var title = BookCollection.findOne(Session.get('selected-title'));
         return title && title.title;
@@ -29,21 +30,45 @@ if (Meteor.isClient) {
         return obj && obj.author;
     };
     
+    //returns the avgRating of the selected-title
     Template.bookrating.avgRating = function(){
         var rating = BookCollection.findOne(Session.get('selected-title'));
         return rating && rating.avgRating;
     };
     
+    //stars should become colored when clicked. handles coloring. Note:Coloring not working atm
+    //changes without a title being rated yet
     Template.star.events({
     'click': function(){
         $('.starholder').on('click','.stars', function(){
             $(this).addClass('star-selected');
             $(this).prevAll().addClass('star-selected');
             $(this).nextAll().removeClass('star-selected');
-            $('.alert').fadeToggle(1000);
+            event.preventDefault();
+            //fadeToggle not working
+            $('.alert').fadeIn('slow');
+            //add rating to collection after desired number of stars is selected
+            currentRating = $(this).prevAll().length + 1;
+            updateCumulativeRating();
+            updateAverageRating();
         });
     }
     });
+    
+    function updateCumulativeRating()
+    {
+        console.log(currentRating);
+        BookCollection.update(Session.get('selected-title'),{$inc:{cumulativeRating:currentRating, numberOfRatings:1}});
+    }
+    
+    function updateAverageRating()
+    {
+        var numberOfRatings = BookCollection.findOne(Session.get('selected-title')).numberOfRatings;
+        var cumulativeRating = BookCollection.findOne(Session.get('selected-title')).cumulativeRating;
+        var averageRating = Math.ceil(cumulativeRating / numberOfRatings);
+        console.log(averageRating);
+        BookCollection.update(Session.get('selected-title'),{$set:{avgRating:averageRating}});
+    }
 }
 
 if (Meteor.isServer) {
