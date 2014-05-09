@@ -1,5 +1,8 @@
 BookCollection = new Meteor.Collection('bookCollection');
+UserCollection1 = new Meteor.Collection('users');
 var currentRating = 0;
+var loggedInUser = "";
+
 if (Meteor.isClient) {
     Template.books.book = function(){
         return BookCollection.find();
@@ -70,7 +73,19 @@ if (Meteor.isClient) {
         }
     });
     
+    Template.auth.login = function(){
+        return "Login";
+    };
     
+    Template.auth.signup = function(){
+        return "Sign Up";
+    };
+    
+    Template.auth.events({
+        'click #login': function(){
+            $('#loginModal').modal('show');
+        }
+    });
     function updateCumulativeRating()
     {
         console.log(currentRating);
@@ -108,6 +123,18 @@ if (Meteor.isServer) {
           }
       }
       
-      
+      if(UserCollection1.find().count() == 0)
+      {
+          var user1  = {'username':'user1','password':'abc','GreatGatsbyRating':0, 'GrapesOfWrathRating':0,'1984Rating':0,
+                        'Catch-22Rating':0,'ToKillAMockingbirdRating':0, 'BraveNewWorldRating':0,
+                        'PrideandPrejudiceRating':0,'LordoftheFliesRating':0,'AnimalFarm':0,'WarandPeaceRating':0};
+          
+          var user2 = {'username':'user2','password':'abc','GreatGatsbyRating':0, 'GrapesOfWrathRating':0,'1984Rating':0,
+                        'Catch-22Rating':0,'ToKillAMockingbirdRating':0, 'BraveNewWorldRating':0,
+                        'PrideandPrejudiceRating':0,'LordoftheFliesRating':0,'AnimalFarm':0,'WarandPeaceRating':0};
+          
+          UserCollection1.insert(user1);
+          UserCollection.insert(user2);
+      }
   });
 }
